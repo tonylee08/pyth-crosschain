@@ -5,8 +5,7 @@ module pyth::price_info {
     use sui::table::{Self};
     use sui::coin::{Self, Coin};
     use sui::sui::SUI;
-    use sui::clock::{Self, Clock};
-    use pyth::price::{Self, Price};
+    use pyth::price::{Self};
     use pyth::price_identifier::{Self};
     use pyth::i64::{Self};
 
@@ -219,17 +218,16 @@ module pyth::price_info {
         price: u64,
         expo: u64,
         bytes: vector<u8>,
-        clock: &Clock,
+        timestamp_ms: u64,
         ctx: &mut TxContext
     ): PriceInfoObject {
-        let cur_time = clock::timestamp_ms(clock);
         let cur_price_info = new_price_info(
-            cur_time,
-            cur_time,
+            timestamp_ms,
+            timestamp_ms,
             price_feed::new(
                 price_identifier::from_byte_vec(bytes),
-                price::new(i64::new(price, false), 3, i64::new(expo, true), cur_time),
-                price::new(i64::new(1000, false), 3, i64::new(5, true), cur_time),
+                price::new(i64::new(price, false), 3, i64::new(expo, true), timestamp_ms),
+                price::new(i64::new(1000, false), 3, i64::new(5, true), timestamp_ms),
             )
         );
 
