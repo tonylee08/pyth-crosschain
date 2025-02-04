@@ -215,7 +215,7 @@ module pyth::price_info {
     }
 
     #[test_only]
-    public fun test_info_object_for_testing(
+    public fun price_info_object_for_testing(
         price: u64,
         expo: u64,
         bytes: vector<u8>,
