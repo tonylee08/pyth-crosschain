@@ -406,6 +406,7 @@ module pyth::pyth {
 
     fun check_price_is_fresh(price: &Price, clock: &Clock, max_age_secs: u64) {
         let age = abs_diff(clock::timestamp_ms(clock)/1000, price::get_timestamp(price));
+        std::debug::print(&age);
         assert!(age < max_age_secs, E_STALE_PRICE_UPDATE);
     }
 
