@@ -218,16 +218,16 @@ module pyth::price_info {
         price: u64,
         expo: u64,
         bytes: vector<u8>,
-        timestamp_ms: u64,
+        timestamp_seconds: u64,
         ctx: &mut TxContext
     ): PriceInfoObject {
         let cur_price_info = new_price_info(
-            timestamp_ms,
-            timestamp_ms,
+            timestamp_seconds,
+            timestamp_seconds,
             price_feed::new(
                 price_identifier::from_byte_vec(bytes),
-                price::new(i64::new(price, false), 3, i64::new(expo, true), timestamp_ms),
-                price::new(i64::new(1000, false), 3, i64::new(5, true), timestamp_ms),
+                price::new(i64::new(price, false), 3, i64::new(expo, true), timestamp_seconds),
+                price::new(i64::new(1000, false), 3, i64::new(5, true), timestamp_seconds),
             )
         );
 
